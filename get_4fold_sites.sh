@@ -21,9 +21,9 @@ CDSbedout='/ohta/tyler.kent/BMap/Data/Thal_CDS.bed'
 #fastaCDSout='test.tab'
 fastaCDSout='/ohta/tyler.kent/BMap/Data/Thal_CDS.tab'
 #longestonly='test.longest.tab'
-longestonly='/ohta/tyler.kent/BMap/Data/Thal_CDS.longest.tab'
+#longestonly='/ohta/tyler.kent/BMap/Data/Thal_CDS.longest.tab'
 #fourfoldbedout='test.4fold'
-fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_4fold'
+fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_degenerate'
 
 ###################################
 # STEP 1: GET BED FILE OF CDS AND
@@ -36,7 +36,7 @@ fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_4fold'
 # codon.
 ###################################
 
-#bash gff2bed.sh <(zcat ${gff}) CDS | awk -f gffphaseshift.awk - > ${CDSbedout}
+bash gff2bed.sh <(zcat ${gff}) CDS | awk -f gffphaseshift.awk - > ${CDSbedout}
 
 ###################################
 # STEP 2: USE BED FILE AND FASTA
@@ -47,7 +47,7 @@ fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_4fold'
 # format.
 ###################################
 
-#bedtools getfasta -s -tab -name -fi ${fasta} -bed ${CDSbedout} > ${fastaCDSout}
+bedtools getfasta -s -tab -name -fi ${fasta} -bed ${CDSbedout} > ${fastaCDSout}
 
 ###################################
 # STEP 3: KEEP ONLY LONGEST 
@@ -67,7 +67,7 @@ fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_4fold'
 # Using python and a codon table
 ###################################
 
-#python degeneracy.py -i ${longestonly} -o ${fourfoldbedout}.bed 
+python degeneracy.py -i ${fastaCDSout} -o ${fourfoldbedout}
 
 ###################################
 # STEP 5: SORT OUTPUT
@@ -77,4 +77,4 @@ fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_4fold'
 # bed file, and drop mistake dups.
 ###################################
 
-cat ${fourfoldbedout}.bed | sort -k1,1 -k2,2n | uniq > ${fourfoldbedout}.sorted.bed
+#cat ${fourfoldbedout}.bed | sort -k1,1 -k2,2n | uniq > ${fourfoldbedout}.sorted.bed

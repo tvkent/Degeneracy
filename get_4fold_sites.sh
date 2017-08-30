@@ -12,18 +12,18 @@
 # adjusted. Assume gff is gzipped.
 ###################################
 
-gff='/ohta/tyler.kent/Storage/Arabidopsis_thaliana.TAIR10.34.gff3.gz'
+gff='/lore/tyler.kent/rice/Oryza_sativa.IRGSP-1.0.33.chr.gff3.gz'
 #gff='/ohta/tyler.kent/Storage/Crubella_183_v1.0.gene_exons.gff3.gz'
 #fasta='/ohta/tyler.kent/Storage/Capsella_rubella_v1.0_combined.fasta'
-fasta='/ohta/tyler.kent/BMap/Data/Crucifers/Reformatted/Thal_bedtools.fa'
+fasta='/lore/tyler.kent/rice/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa'
 #CDSbedout='test.bed'
-CDSbedout='/ohta/tyler.kent/BMap/Data/Thal_CDS.bed'
+CDSbedout='/lore/tyler.kent/rice/Os_CDS.bed'
 #fastaCDSout='test.tab'
-fastaCDSout='/ohta/tyler.kent/BMap/Data/Thal_CDS.tab'
+fastaCDSout='/lore/tyler.kent/rice/Os_CDS.tab'
 #longestonly='test.longest.tab'
 #longestonly='/ohta/tyler.kent/BMap/Data/Thal_CDS.longest.tab'
 #fourfoldbedout='test.4fold'
-fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_degenerate'
+fourfoldbedout='/lore/tyler.kent/rice/Os_degenerate'
 
 ###################################
 # STEP 1: GET BED FILE OF CDS AND
@@ -36,7 +36,7 @@ fourfoldbedout='/ohta/tyler.kent/BMap/Data/Thal_degenerate'
 # codon.
 ###################################
 
-bash gff2bed.sh <(zcat ${gff}) CDS | awk -f gffphaseshift.awk - > ${CDSbedout}
+#bash gff2bed.sh <(zcat ${gff}) CDS | awk -f gffphaseshift.awk - > ${CDSbedout}
 
 ###################################
 # STEP 2: USE BED FILE AND FASTA
@@ -47,7 +47,7 @@ bash gff2bed.sh <(zcat ${gff}) CDS | awk -f gffphaseshift.awk - > ${CDSbedout}
 # format.
 ###################################
 
-bedtools getfasta -s -tab -name -fi ${fasta} -bed ${CDSbedout} > ${fastaCDSout}
+#bedtools getfasta -s -tab -name -fi ${fasta} -bed ${CDSbedout} > ${fastaCDSout}
 
 ###################################
 # STEP 3: KEEP ONLY LONGEST 
@@ -57,7 +57,8 @@ bedtools getfasta -s -tab -name -fi ${fasta} -bed ${CDSbedout} > ${fastaCDSout}
 # the longest.
 ###################################
 
-#python keep_longest_isoform.py -i ${fastaCDSout} -o ${longestonly}
+# DEPRECATED--DONT DO THIS STEP
+###python keep_longest_isoform.py -i ${fastaCDSout} -o ${longestonly}
 
 ###################################
 # STEP 4: CONVERT FASTA DNA
@@ -77,4 +78,5 @@ python degeneracy.py -i ${fastaCDSout} -o ${fourfoldbedout}
 # bed file, and drop mistake dups.
 ###################################
 
+# DEPRECATED--DONT DO THIS STEP
 #cat ${fourfoldbedout}.bed | sort -k1,1 -k2,2n | uniq > ${fourfoldbedout}.sorted.bed

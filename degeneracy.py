@@ -297,7 +297,7 @@ def pull_degenerates(Degenerate,df,fniter,outpath):
 
 			pstart = int(df['start'][0][0])
 			pend = int(df['end'][0][0])
-			chr = str(df['chr'][0][0])
+			chr = str(df['chr'][0])
 			name = str(df['name'][0][0]).split('.')[0]
 
 		else:

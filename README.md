@@ -1,4 +1,5 @@
 # Degeneracy
+__WARNING__: the getfasta input to the python script has to be very specifically formatted and breaks depending on how your gff was formatted. eg: OS01T0100100-01::1:3448-3616(+) where the fields are gene::chromosome:start-end(strand)
 degeneracy.py will take a bedtools getfasta tab output file and return 0 and 4fold sites.
 Annotated coding sequence that overlaps other CDS annotations will be filtered to keep only sites that are in agreement.
 CDS that overlaps in position but exists on opposite strands will be filtered such that 4fold sites will only be called if they don't overlap with 0fold sites on the opposite strand and if they overlap between strands (basically a double check).

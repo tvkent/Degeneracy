@@ -420,7 +420,7 @@ def define_sites():
 		"0fold_12":{"GGA","GGC","GGG","GGT","GAG","GAA","GAT","GAC","GCA","GCC","GCG",
 			"GCT","GTA","GTG","GTC","GTT","AAG","AAA","AAC","AAT","ACG","ACC","ACT",
 			"ACA","ATA","ATC","ATT","CAG","CAA","CAT","CAC","CCG","CCC","CCA","CCT",
-			"TGC","TGT","TAC","TAT","TTC","TTT"
+			"TGC","TGT","TAC","TAT","TTC","TTT","TCT","TCG","TCA","TCC","AGC","AGT"
 		},
 
 		"0fold_all":{"ATG","TGG"
